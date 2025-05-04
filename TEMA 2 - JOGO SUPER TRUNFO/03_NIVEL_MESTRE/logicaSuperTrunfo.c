@@ -13,20 +13,23 @@ int main()
     float densidadePopulacional1, densidadePopulacional2;
     float perCapita1, perCapita2;
     float somaPoder1, somaPoder2;
-    int opcao1, opcao2; // variavel do menu interativo
-    float somaAtributos1, somaAtributos2; // Para soma dos atributos
+    int opcao1, opcao2;
+    float somaAtributos1, somaAtributos2;
 
     // Coleta e armazena as informaçoes da Carta 1
     printf("\nCarta 1\n");
     printf("Digite uma letra de A até H:\n");
     scanf(" %c", &estado1);
-    printf("Digite o código da cidade ex: A01, B02:\n");
+    getchar();
+    printf("Digite o código do país ex: A01, B02:\n");
     scanf("%s", codigo1);
-    printf("Digite o nome do pais:\n");
+    getchar();
+    printf("Digite o nome do país:\n");
     scanf("%s", pais1);
+    getchar();
     printf("Digite a população:\n");
     scanf("%lu", &populacao1);
-    printf("Digite a área da pais:\n");
+    printf("Digite a área do país:\n");
     scanf("%f", &areaKm1);
     printf("Digite o PIB:\n");
     scanf("%f", &pib1);
@@ -37,13 +40,16 @@ int main()
     printf("\nCarta 2\n");
     printf("Digite uma letra de A até H:\n");
     scanf(" %c", &estado2);
-    printf("Digite o código da cidade ex: A01, B02:\n");
+    getchar();
+    printf("Digite o código do país ex: A01, B02:\n");
     scanf("%s", codigo2);
-    printf("Digite o nome da pais:\n");
+    getchar();
+    printf("Digite o nome do país:\n");
     scanf("%s", pais2);
+    getchar();
     printf("Digite a população:\n");
     scanf("%lu", &populacao2);
-    printf("Digite a área da pais:\n");
+    printf("Digite a área do país:\n");
     scanf("%f", &areaKm2);
     printf("Digite o PIB:\n");
     scanf("%f", &pib2);
@@ -67,8 +73,12 @@ int main()
     printf("5. Densidade demográfica\n");
     printf("Digite a opção: ");
     scanf("%d", &opcao1);
+    if (opcao1 < 1 || opcao1 > 5) {
+        printf("Opção inválida! Programa encerrado.\n");
+        return 1;
+    }
 
-    // Menu interativo para o segundo atributo, excluindo o primeiro
+    // Menu interativo para o segundo atributo
     printf("\nEscolha o segundo atributo para comparar:\n");
     if (opcao1 != 1) printf("1. População\n");
     if (opcao1 != 2) printf("2. Área\n");
@@ -76,27 +86,26 @@ int main()
     if (opcao1 != 4) printf("4. Pontos turísticos\n");
     if (opcao1 != 5) printf("5. Densidade demográfica\n");
     printf("Digite a opção: ");
-    do {
+    scanf("%d", &opcao2);
+    if (opcao2 == opcao1 || opcao2 < 1 || opcao2 > 5) {
+        printf("Opção inválida ou atributo já escolhido! Digite novamente: ");
         scanf("%d", &opcao2);
-        if (opcao2 == opcao1) {
-            printf("Atributo já escolhido! Escolha outro: ");
+        if (opcao2 == opcao1 || opcao2 < 1 || opcao2 > 5) {
+            printf("Opção inválida! Programa encerrado.\n");
+            return 1;
         }
-        if (opcao2 < 1 || opcao2 > 5) {
-            printf("Opção inválida! Escolha novamente: ");
-        }
-    } while (opcao2 == opcao1 || opcao2 < 1 || opcao2 > 5);
+    }
 
     // Comparação dos atributos
     printf("\nComparação entre %s e %s\n", pais1, pais2);
 
-    // Variáveis para armazenar os valores dos atributos para soma
+    // Inicializa soma dos atributos
     somaAtributos1 = 0;
     somaAtributos2 = 0;
 
     // Comparação do primeiro atributo
     switch (opcao1) {
         case 1:
-            // População: maior vence
             printf("População %s: %lu\n", pais1, populacao1);
             printf("População %s: %lu\n", pais2, populacao2);
             if (populacao1 > populacao2) {
@@ -111,7 +120,6 @@ int main()
             break;
 
         case 2:
-            // Área: maior vence
             printf("Área de %s: %.2f km²\n", pais1, areaKm1);
             printf("Área de %s: %.2f km²\n", pais2, areaKm2);
             if (areaKm1 > areaKm2) {
@@ -126,7 +134,6 @@ int main()
             break;
 
         case 3:
-            // PIB: maior vence
             printf("PIB de %s: R$ %.2f bilhões\n", pais1, pib1);
             printf("PIB de %s: R$ %.2f bilhões\n", pais2, pib2);
             if (pib1 > pib2) {
@@ -141,7 +148,6 @@ int main()
             break;
 
         case 4:
-            // Pontos turísticos: maior vence
             printf("Pontos turísticos de %s: %d\n", pais1, pontosTuristicos1);
             printf("Pontos turísticos de %s: %d\n", pais2, pontosTuristicos2);
             if (pontosTuristicos1 > pontosTuristicos2) {
@@ -156,7 +162,6 @@ int main()
             break;
 
         case 5:
-            // Densidade demográfica: menor vence
             printf("Densidade demográfica de %s: %.2f hab/km²\n", pais1, densidadePopulacional1);
             printf("Densidade demográfica de %s: %.2f hab/km²\n", pais2, densidadePopulacional2);
             if (densidadePopulacional1 < densidadePopulacional2) {
@@ -171,14 +176,13 @@ int main()
             break;
 
         default:
-            printf("Opção inválida! Tente novamente.\n");
+            printf("Opção inválida! Programa encerrado.\n");
             return 1;
     }
 
     // Comparação do segundo atributo
     switch (opcao2) {
         case 1:
-            // População: maior vence
             printf("População %s: %lu\n", pais1, populacao1);
             printf("População %s: %lu\n", pais2, populacao2);
             if (populacao1 > populacao2) {
@@ -193,7 +197,6 @@ int main()
             break;
 
         case 2:
-            // Área: maior vence
             printf("Área de %s: %.2f km²\n", pais1, areaKm1);
             printf("Área de %s: %.2f km²\n", pais2, areaKm2);
             if (areaKm1 > areaKm2) {
@@ -208,7 +211,6 @@ int main()
             break;
 
         case 3:
-            // PIB: maior vence
             printf("PIB de %s: R$ %.2f bilhões\n", pais1, pib1);
             printf("PIB de %s: R$ %.2f bilhões\n", pais2, pib2);
             if (pib1 > pib2) {
@@ -223,7 +225,6 @@ int main()
             break;
 
         case 4:
-            // Pontos turísticos: maior vence
             printf("Pontos turísticos de %s: %d\n", pais1, pontosTuristicos1);
             printf("Pontos turísticos de %s: %d\n", pais2, pontosTuristicos2);
             if (pontosTuristicos1 > pontosTuristicos2) {
@@ -238,7 +239,6 @@ int main()
             break;
 
         case 5:
-            // Densidade demográfica: menor vence
             printf("Densidade demográfica de %s: %.2f hab/km²\n", pais1, densidadePopulacional1);
             printf("Densidade demográfica de %s: %.2f hab/km²\n", pais2, densidadePopulacional2);
             if (densidadePopulacional1 < densidadePopulacional2) {
@@ -253,7 +253,7 @@ int main()
             break;
 
         default:
-            printf("Opção inválida! Tente novamente.\n");
+            printf("Opção inválida! Programa encerrado.\n");
             return 1;
     }
 
